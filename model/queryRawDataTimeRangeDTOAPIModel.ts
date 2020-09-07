@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+
 /**
  * Raw Data Resource and Timerange criteria
  */

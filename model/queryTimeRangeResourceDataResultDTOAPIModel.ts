@@ -11,6 +11,7 @@
  */
 import { AnalyticsResourceDataResponseDTOAPIModel } from './analyticsResourceDataResponseDTOAPIModel';
 
+
 /**
  * Wrapper object for timeranged Data query responses
  */

@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+
 /**
  * The API Model holding Resource summary data of different granularity
  */

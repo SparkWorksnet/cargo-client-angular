@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+
 /**
  * The API Participatory Sensing Resource Model
  */

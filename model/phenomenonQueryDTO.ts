@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+
 export interface PhenomenonQueryDTO { 
     name?: string;
     uuid?: string;

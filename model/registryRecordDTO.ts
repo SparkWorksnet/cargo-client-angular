@@ -11,6 +11,7 @@
  */
 import { RegistryPairDTO } from './registryPairDTO';
 
+
 export interface RegistryRecordDTO { 
     pairs?: Array<RegistryPairDTO>;
     systemName?: string;

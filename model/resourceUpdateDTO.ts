@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+
 export interface ResourceUpdateDTO { 
     controls?: string;
     phenomenonUuid?: string;

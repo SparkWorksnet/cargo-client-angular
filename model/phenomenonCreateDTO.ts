@@ -10,6 +10,17 @@
  * Do not edit the class manually.
  */
 
+
 export interface PhenomenonCreateDTO { 
+    aggregationMethod?: PhenomenonCreateDTO.AggregationMethodEnum;
     name?: string;
+}
+export namespace PhenomenonCreateDTO {
+    export type AggregationMethodEnum = 'min' | 'max' | 'average' | 'total';
+    export const AggregationMethodEnum = {
+        Min: 'min' as AggregationMethodEnum,
+        Max: 'max' as AggregationMethodEnum,
+        Average: 'average' as AggregationMethodEnum,
+        Total: 'total' as AggregationMethodEnum
+    };
 }

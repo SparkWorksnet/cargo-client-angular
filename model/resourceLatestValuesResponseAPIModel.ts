@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+
 /**
  * Resource latest values Response API Model
  */
