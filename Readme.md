@@ -1,5 +1,7 @@
 # Cargo Client
 
+[![Build Status](https://travis-ci.org/SparkWorksnet/cargo-client-angular.svg?branch=master)](https://travis-ci.org/SparkWorksnet/cargo-client-angular)
+
 This library acts as a client for SparkWorks [CaRGO](https://api.sparkworks.net).
 The library is designed to be used inside an Angular application.
 
