@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+
 /**
  * Resource Timerange Query Criteria
  */

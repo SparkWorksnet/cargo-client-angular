@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+
 export interface GatewayQueryDTO { 
     systemName?: string;
     uuid?: string;

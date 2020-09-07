@@ -9,15 +9,22 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { QueryResourceDataCriteriaDTOAPIModel } from './queryResourceDataCriteriaDTOAPIModel';
 
 
 /**
- * Object holding queries for latest Resource data
+ * FoodDiary Data Timerange Query Criteria
  */
-export interface QueryLatestResourceDataDTOAPIModel { 
+export interface FoodDiaryDataCriteriaDTOAPIModel { 
     /**
-     * QueryResourceDataCriteriaDTO API Model
+     * The UNIX timestamp of the start date for filtering
      */
-    queries: Array<QueryResourceDataCriteriaDTOAPIModel>;
+    from: number;
+    /**
+     * The UUID of the food diary Resource
+     */
+    resourceUuid?: string;
+    /**
+     * The UNIX timestamp of the end date for filtering
+     */
+    to: number;
 }

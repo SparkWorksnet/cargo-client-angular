@@ -18,7 +18,8 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { CommandAPIModel } from '../model/commandAPIModel';
+import { FoodDiaryDTO } from '../model/foodDiaryDTO';
+import { FoodDiaryDataCriteriaDTOAPIModel } from '../model/foodDiaryDataCriteriaDTOAPIModel';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -27,7 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class CommandService {
+export class SmartWorkService {
 
     protected basePath = 'https://api.sparkworks.net';
     public defaultHeaders = new HttpHeaders();
@@ -59,24 +60,19 @@ export class CommandService {
 
 
     /**
-     * Send a command to a SparkWorks Actuator Resource
-     * A Spark Works Accounts authorized user is able to send a command to a Spark Works Actuator Resource by its unique identifier. An administrator is able to send a command to any Actuator Resource of the platform
-     * @param uuid The unique identifier of the Actuator Resource
-     * @param commandDto commandDto
+     * retrieveFoodDiary
+     * 
+     * @param foodDiaryDataCriteriaDTO Food Diary Timerange criteria
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public sendCommand(uuid: string, commandDto: CommandAPIModel, observe?: 'body', reportProgress?: boolean): Observable<CommandAPIModel>;
-    public sendCommand(uuid: string, commandDto: CommandAPIModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CommandAPIModel>>;
-    public sendCommand(uuid: string, commandDto: CommandAPIModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CommandAPIModel>>;
-    public sendCommand(uuid: string, commandDto: CommandAPIModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public retrieveFoodDiaryUsingPOST(foodDiaryDataCriteriaDTO: FoodDiaryDataCriteriaDTOAPIModel, observe?: 'body', reportProgress?: boolean): Observable<Array<FoodDiaryDTO>>;
+    public retrieveFoodDiaryUsingPOST(foodDiaryDataCriteriaDTO: FoodDiaryDataCriteriaDTOAPIModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<FoodDiaryDTO>>>;
+    public retrieveFoodDiaryUsingPOST(foodDiaryDataCriteriaDTO: FoodDiaryDataCriteriaDTOAPIModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<FoodDiaryDTO>>>;
+    public retrieveFoodDiaryUsingPOST(foodDiaryDataCriteriaDTO: FoodDiaryDataCriteriaDTOAPIModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling sendCommand.');
-        }
-
-        if (commandDto === null || commandDto === undefined) {
-            throw new Error('Required parameter commandDto was null or undefined when calling sendCommand.');
+        if (foodDiaryDataCriteriaDTO === null || foodDiaryDataCriteriaDTO === undefined) {
+            throw new Error('Required parameter foodDiaryDataCriteriaDTO was null or undefined when calling retrieveFoodDiaryUsingPOST.');
         }
 
         let headers = this.defaultHeaders;
@@ -107,8 +103,8 @@ export class CommandService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<CommandAPIModel>(`${this.basePath}/v2/command/${encodeURIComponent(String(uuid))}`,
-            commandDto,
+        return this.httpClient.post<Array<FoodDiaryDTO>>(`${this.basePath}/v2/project/smartwork/foodDiary`,
+            foodDiaryDataCriteriaDTO,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

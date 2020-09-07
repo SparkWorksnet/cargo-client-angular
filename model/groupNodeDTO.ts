@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 
+
 export interface GroupNodeDTO { 
     name?: string;
     subGroups?: Array<GroupNodeDTO>;
