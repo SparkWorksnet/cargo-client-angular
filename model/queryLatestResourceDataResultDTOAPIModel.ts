@@ -11,6 +11,7 @@
  */
 import { SingleResourceMeasurementAPIModel } from './singleResourceMeasurementAPIModel';
 
+
 /**
  * Wrapper object for latest Data query responses
  */

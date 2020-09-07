@@ -11,6 +11,7 @@
  */
 import { SingleResourceMeasurementAPIModel } from './singleResourceMeasurementAPIModel';
 
+
 /**
  * Resource Analytics data response
  */

@@ -11,7 +11,6 @@
  */
 
 
-export interface ResourceQueryDTO { 
-    systemName?: string;
-    uuid?: string;
+export interface TypicalHourlyDataDTO { 
+    readings?: { [key: string]: { [key: string]: number; }; };
 }

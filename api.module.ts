@@ -11,6 +11,7 @@ import { ParticipatorySensingService } from './api/participatorySensing.service'
 import { PhenomenonService } from './api/phenomenon.service';
 import { RegistryService } from './api/registry.service';
 import { ResourceService } from './api/resource.service';
+import { SmartWorkService } from './api/smartWork.service';
 import { UnitService } from './api/unit.service';
 import { UnitConversionService } from './api/unitConversion.service';
 
@@ -27,6 +28,7 @@ import { UnitConversionService } from './api/unitConversion.service';
     PhenomenonService,
     RegistryService,
     ResourceService,
+    SmartWorkService,
     UnitService,
     UnitConversionService ]
 })

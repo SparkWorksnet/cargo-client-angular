@@ -11,6 +11,7 @@
  */
 import { QueryTimeRangeResourceDataCriteriaDTOAPIModel } from './queryTimeRangeResourceDataCriteriaDTOAPIModel';
 
+
 /**
  * Wrapper object for Resource Timerange Query Criteria
  */

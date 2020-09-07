@@ -11,7 +11,8 @@
  */
 
 
-export interface ResourceQueryDTO { 
-    systemName?: string;
-    uuid?: string;
+export interface Mapintdouble { 
+  [key: string]: number;
+
+
 }

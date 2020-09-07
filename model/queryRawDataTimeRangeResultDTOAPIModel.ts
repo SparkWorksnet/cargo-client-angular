@@ -11,6 +11,7 @@
  */
 import { SingleResourceMeasurementAPIModel } from './singleResourceMeasurementAPIModel';
 
+
 /**
  * Raw Data query response
  */
