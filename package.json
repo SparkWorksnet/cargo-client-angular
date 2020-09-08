@@ -22,6 +22,6 @@
     "build": "tsc"
   },
   "types": "index.ts",
-  "version": "2.8.5",
+  "version": "2.7.5",
   "description": ""
 }
