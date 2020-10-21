@@ -10,4 +10,13 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
+var PhenomenonUpdateDTO;
+(function (PhenomenonUpdateDTO) {
+    PhenomenonUpdateDTO.AggregationMethodEnum = {
+        Min: 'min',
+        Max: 'max',
+        Average: 'average',
+        Total: 'total'
+    };
+})(PhenomenonUpdateDTO = exports.PhenomenonUpdateDTO || (exports.PhenomenonUpdateDTO = {}));
