@@ -3,7 +3,7 @@ node_js:
 - '12.13'
 
 script:
-  - npm run build
+  - npm run build-prod
 before_deploy:
     - cd dist/sparkworks-cargo-client
 deploy:
