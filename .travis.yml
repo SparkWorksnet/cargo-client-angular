@@ -1,7 +1,10 @@
 language: node_js
 node_js:
 - '12.13'
-- before_deploy:
+
+script:
+  - npm run build
+before_deploy:
     - cd dist/sparkworks-cargo-client
 deploy:
   provider: npm
