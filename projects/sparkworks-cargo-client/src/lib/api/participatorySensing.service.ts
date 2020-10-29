@@ -117,7 +117,7 @@ export class ParticipatorySensingService {
 
     /**
      * Delete a Participatory Sensing Resource
-     * Provides means to delete a participatory sensing resource 
+     * Provides means to delete a participatory sensing resource
      * @param uuid The Participatory Sensing Resource UUID
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

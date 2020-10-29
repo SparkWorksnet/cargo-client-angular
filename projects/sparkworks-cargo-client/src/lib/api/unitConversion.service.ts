@@ -18,10 +18,9 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { PhenomenonCreateDTO } from '../model/phenomenonCreateDTO';
-import { PhenomenonDTO } from '../model/phenomenonDTO';
-import { PhenomenonQueryDTO } from '../model/phenomenonQueryDTO';
-import { PhenomenonUpdateDTO } from '../model/phenomenonUpdateDTO';
+import { UnitConversionCreateDTO } from '../model/unitConversionCreateDTO';
+import { UnitConversionDTO } from '../model/unitConversionDTO';
+import { UnitConversionQueryDTO } from '../model/unitConversionQueryDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -30,7 +29,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class PhenomenonService {
+export class UnitConversionService {
 
     protected basePath = 'https://api.sparkworks.net';
     public defaultHeaders = new HttpHeaders();
@@ -62,19 +61,19 @@ export class PhenomenonService {
 
 
     /**
-     * Create a Phenomenon
-     * A Spark Works Accounts authenticated user is able to create a Phenomenon. 
-     * @param phenomenonCreateDTO The Phenomenon Query
+     * Create a Unit Conversion
+     * A Spark Works Accounts authenticated user is able to create a Unit Conversion.
+     * @param unitConversionCreateDTO Unit Conversion Create API Model
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createPhenomenon(phenomenonCreateDTO: PhenomenonCreateDTO, observe?: 'body', reportProgress?: boolean): Observable<PhenomenonDTO>;
-    public createPhenomenon(phenomenonCreateDTO: PhenomenonCreateDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PhenomenonDTO>>;
-    public createPhenomenon(phenomenonCreateDTO: PhenomenonCreateDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PhenomenonDTO>>;
-    public createPhenomenon(phenomenonCreateDTO: PhenomenonCreateDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createUnitConversion(unitConversionCreateDTO: UnitConversionCreateDTO, observe?: 'body', reportProgress?: boolean): Observable<UnitConversionDTO>;
+    public createUnitConversion(unitConversionCreateDTO: UnitConversionCreateDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UnitConversionDTO>>;
+    public createUnitConversion(unitConversionCreateDTO: UnitConversionCreateDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UnitConversionDTO>>;
+    public createUnitConversion(unitConversionCreateDTO: UnitConversionCreateDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (phenomenonCreateDTO === null || phenomenonCreateDTO === undefined) {
-            throw new Error('Required parameter phenomenonCreateDTO was null or undefined when calling createPhenomenon.');
+        if (unitConversionCreateDTO === null || unitConversionCreateDTO === undefined) {
+            throw new Error('Required parameter unitConversionCreateDTO was null or undefined when calling createUnitConversion.');
         }
 
         let headers = this.defaultHeaders;
@@ -105,8 +104,8 @@ export class PhenomenonService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<PhenomenonDTO>(`${this.basePath}/v2/phenomenon`,
-            phenomenonCreateDTO,
+        return this.httpClient.post<UnitConversionDTO>(`${this.basePath}/v2/conversion`,
+            unitConversionCreateDTO,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -117,19 +116,19 @@ export class PhenomenonService {
     }
 
     /**
-     * Delete a Phenomenon by its UUID
-     * A Spark Works Accounts authenticated user is able to delete a Phenomenon by its UUID.
-     * @param uuid The Phenomenon UUID
+     * Delete a Unit Conversion by its UUID
+     * A Spark Works Accounts authenticated user is able to delete a Unit Conversion by its UUID.
+     * @param uuid The Unit Conversion UUID
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deletePhenomenon(uuid: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public deletePhenomenon(uuid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public deletePhenomenon(uuid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public deletePhenomenon(uuid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteUnitConversion(uuid: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public deleteUnitConversion(uuid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public deleteUnitConversion(uuid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public deleteUnitConversion(uuid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling deletePhenomenon.');
+            throw new Error('Required parameter uuid was null or undefined when calling deleteUnitConversion.');
         }
 
         let headers = this.defaultHeaders;
@@ -155,7 +154,7 @@ export class PhenomenonService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.delete<any>(`${this.basePath}/v2/phenomenon/${encodeURIComponent(String(uuid))}`,
+        return this.httpClient.delete<any>(`${this.basePath}/v2/conversion/${encodeURIComponent(String(uuid))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -166,15 +165,15 @@ export class PhenomenonService {
     }
 
     /**
-     * Retrieve a collection of Phenomenons
-     * A Spark Works Accounts authenticated user is able to retrieve all of the Platform Phenomenons. 
+     * Retrieve a collection of Unit Conversions
+     * A Spark Works Accounts authenticated user is able to retrieve all of the Platform Unit Conversions.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllPhenomena(observe?: 'body', reportProgress?: boolean): Observable<Array<PhenomenonDTO>>;
-    public getAllPhenomena(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<PhenomenonDTO>>>;
-    public getAllPhenomena(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<PhenomenonDTO>>>;
-    public getAllPhenomena(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAllUnitConversions(observe?: 'body', reportProgress?: boolean): Observable<Array<UnitConversionDTO>>;
+    public getAllUnitConversions(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UnitConversionDTO>>>;
+    public getAllUnitConversions(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UnitConversionDTO>>>;
+    public getAllUnitConversions(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -199,7 +198,7 @@ export class PhenomenonService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<Array<PhenomenonDTO>>(`${this.basePath}/v2/phenomenon`,
+        return this.httpClient.get<Array<UnitConversionDTO>>(`${this.basePath}/v2/conversion`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -210,19 +209,19 @@ export class PhenomenonService {
     }
 
     /**
-     * Retrieve a Phenomenon by its UUID
-     * A Spark Works Accounts authenticated common user is able to retrieve a Phenomenon that has permissions on by its UUID. An administrator is able to get any Phenomenon by its UUID.
-     * @param uuid The Phenomenon UUID
+     * Retrieve a Unit Conversion by its UUID
+     * A Spark Works Accounts authenticated user is able to retrieve a Unit Conversion.
+     * @param uuid The Unit Conversion UUID
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getPhenomenonByUuid(uuid: string, observe?: 'body', reportProgress?: boolean): Observable<PhenomenonDTO>;
-    public getPhenomenonByUuid(uuid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PhenomenonDTO>>;
-    public getPhenomenonByUuid(uuid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PhenomenonDTO>>;
-    public getPhenomenonByUuid(uuid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getUnitConversionByUuid(uuid: string, observe?: 'body', reportProgress?: boolean): Observable<UnitConversionDTO>;
+    public getUnitConversionByUuid(uuid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UnitConversionDTO>>;
+    public getUnitConversionByUuid(uuid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UnitConversionDTO>>;
+    public getUnitConversionByUuid(uuid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling getPhenomenonByUuid.');
+            throw new Error('Required parameter uuid was null or undefined when calling getUnitConversionByUuid.');
         }
 
         let headers = this.defaultHeaders;
@@ -248,7 +247,7 @@ export class PhenomenonService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<PhenomenonDTO>(`${this.basePath}/v2/phenomenon/${encodeURIComponent(String(uuid))}`,
+        return this.httpClient.get<UnitConversionDTO>(`${this.basePath}/v2/conversion/${encodeURIComponent(String(uuid))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -259,19 +258,19 @@ export class PhenomenonService {
     }
 
     /**
-     * Retrieve a Phenomenon by a query
-     * A Spark Works Accounts authenticated user is able to retrieve a Phenomenon. 
-     * @param phenomenonQueryDTO The Phenomenon Query
+     * Retrieve a List of Unit Conversions by a query
+     * A Spark Works Accounts authenticated user is able to retrieve a List of Unit Conversion.
+     * @param unitConversionQueryDTO Unit Conversion Query API Model
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public queryPhenomena(phenomenonQueryDTO: PhenomenonQueryDTO, observe?: 'body', reportProgress?: boolean): Observable<PhenomenonDTO>;
-    public queryPhenomena(phenomenonQueryDTO: PhenomenonQueryDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PhenomenonDTO>>;
-    public queryPhenomena(phenomenonQueryDTO: PhenomenonQueryDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PhenomenonDTO>>;
-    public queryPhenomena(phenomenonQueryDTO: PhenomenonQueryDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public queryUnitConversions(unitConversionQueryDTO: UnitConversionQueryDTO, observe?: 'body', reportProgress?: boolean): Observable<Array<UnitConversionDTO>>;
+    public queryUnitConversions(unitConversionQueryDTO: UnitConversionQueryDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UnitConversionDTO>>>;
+    public queryUnitConversions(unitConversionQueryDTO: UnitConversionQueryDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UnitConversionDTO>>>;
+    public queryUnitConversions(unitConversionQueryDTO: UnitConversionQueryDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (phenomenonQueryDTO === null || phenomenonQueryDTO === undefined) {
-            throw new Error('Required parameter phenomenonQueryDTO was null or undefined when calling queryPhenomena.');
+        if (unitConversionQueryDTO === null || unitConversionQueryDTO === undefined) {
+            throw new Error('Required parameter unitConversionQueryDTO was null or undefined when calling queryUnitConversions.');
         }
 
         let headers = this.defaultHeaders;
@@ -302,68 +301,8 @@ export class PhenomenonService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<PhenomenonDTO>(`${this.basePath}/v2/phenomenon/query`,
-            phenomenonQueryDTO,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Update Phenomenon
-     * A Spark Works Accounts administrator is able to update a Phenomenon by its UUID.
-     * @param uuid The Phenomenon UUID
-     * @param updateDTO updateDTO
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public updatePhenomenon(uuid: string, updateDTO: PhenomenonUpdateDTO, observe?: 'body', reportProgress?: boolean): Observable<PhenomenonDTO>;
-    public updatePhenomenon(uuid: string, updateDTO: PhenomenonUpdateDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PhenomenonDTO>>;
-    public updatePhenomenon(uuid: string, updateDTO: PhenomenonUpdateDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PhenomenonDTO>>;
-    public updatePhenomenon(uuid: string, updateDTO: PhenomenonUpdateDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling updatePhenomenon.');
-        }
-
-        if (updateDTO === null || updateDTO === undefined) {
-            throw new Error('Required parameter updateDTO was null or undefined when calling updatePhenomenon.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // authentication (oauth2) required
-        if (this.configuration.accessToken) {
-            const accessToken = typeof this.configuration.accessToken === 'function'
-                ? this.configuration.accessToken()
-                : this.configuration.accessToken;
-            headers = headers.set('Authorization', 'Bearer ' + accessToken);
-        }
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<PhenomenonDTO>(`${this.basePath}/v2/phenomenon/${encodeURIComponent(String(uuid))}`,
-            updateDTO,
+        return this.httpClient.post<Array<UnitConversionDTO>>(`${this.basePath}/v2/conversion/query`,
+            unitConversionQueryDTO,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

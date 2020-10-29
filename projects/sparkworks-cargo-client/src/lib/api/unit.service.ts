@@ -18,9 +18,10 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { UnitConversionCreateDTO } from '../model/unitConversionCreateDTO';
-import { UnitConversionDTO } from '../model/unitConversionDTO';
-import { UnitConversionQueryDTO } from '../model/unitConversionQueryDTO';
+import { UnitCreateDTO } from '../model/unitCreateDTO';
+import { UnitDTO } from '../model/unitDTO';
+import { UnitQueryDTO } from '../model/unitQueryDTO';
+import { UnitUpdateDTO } from '../model/unitUpdateDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -29,7 +30,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class UnitConversionService {
+export class UnitService {
 
     protected basePath = 'https://api.sparkworks.net';
     public defaultHeaders = new HttpHeaders();
@@ -61,19 +62,19 @@ export class UnitConversionService {
 
 
     /**
-     * Create a Unit Conversion
-     * A Spark Works Accounts authenticated user is able to create a Unit Conversion. 
-     * @param unitConversionCreateDTO Unit Conversion Create API Model
+     * Create a Unit
+     * A Spark Works Accounts authenticated user is able to create a Unit.
+     * @param unitCreateDTO Unit Creation API Model
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createUnitConversion(unitConversionCreateDTO: UnitConversionCreateDTO, observe?: 'body', reportProgress?: boolean): Observable<UnitConversionDTO>;
-    public createUnitConversion(unitConversionCreateDTO: UnitConversionCreateDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UnitConversionDTO>>;
-    public createUnitConversion(unitConversionCreateDTO: UnitConversionCreateDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UnitConversionDTO>>;
-    public createUnitConversion(unitConversionCreateDTO: UnitConversionCreateDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createUnit(unitCreateDTO: UnitCreateDTO, observe?: 'body', reportProgress?: boolean): Observable<UnitDTO>;
+    public createUnit(unitCreateDTO: UnitCreateDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UnitDTO>>;
+    public createUnit(unitCreateDTO: UnitCreateDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UnitDTO>>;
+    public createUnit(unitCreateDTO: UnitCreateDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (unitConversionCreateDTO === null || unitConversionCreateDTO === undefined) {
-            throw new Error('Required parameter unitConversionCreateDTO was null or undefined when calling createUnitConversion.');
+        if (unitCreateDTO === null || unitCreateDTO === undefined) {
+            throw new Error('Required parameter unitCreateDTO was null or undefined when calling createUnit.');
         }
 
         let headers = this.defaultHeaders;
@@ -104,8 +105,8 @@ export class UnitConversionService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<UnitConversionDTO>(`${this.basePath}/v2/conversion`,
-            unitConversionCreateDTO,
+        return this.httpClient.post<UnitDTO>(`${this.basePath}/v2/unit`,
+            unitCreateDTO,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -116,19 +117,19 @@ export class UnitConversionService {
     }
 
     /**
-     * Delete a Unit Conversion by its UUID
-     * A Spark Works Accounts authenticated user is able to delete a Unit Conversion by its UUID.
-     * @param uuid The Unit Conversion UUID
+     * Delete a Unit by its UUID
+     * A Spark Works Accounts authenticated user is able to delete a Unit by its UUID.
+     * @param uuid The Unit UUID
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteUnitConversion(uuid: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public deleteUnitConversion(uuid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public deleteUnitConversion(uuid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public deleteUnitConversion(uuid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public deleteUnit(uuid: string, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public deleteUnit(uuid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public deleteUnit(uuid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public deleteUnit(uuid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling deleteUnitConversion.');
+            throw new Error('Required parameter uuid was null or undefined when calling deleteUnit.');
         }
 
         let headers = this.defaultHeaders;
@@ -154,7 +155,7 @@ export class UnitConversionService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.delete<any>(`${this.basePath}/v2/conversion/${encodeURIComponent(String(uuid))}`,
+        return this.httpClient.delete<any>(`${this.basePath}/v2/unit/${encodeURIComponent(String(uuid))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -165,15 +166,15 @@ export class UnitConversionService {
     }
 
     /**
-     * Retrieve a collection of Unit Conversions
-     * A Spark Works Accounts authenticated user is able to retrieve all of the Platform Unit Conversions. 
+     * Retrieve a collection of Units
+     * A Spark Works Accounts authenticated user is able to retrieve all of the Platform Units.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllUnitConversions(observe?: 'body', reportProgress?: boolean): Observable<Array<UnitConversionDTO>>;
-    public getAllUnitConversions(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UnitConversionDTO>>>;
-    public getAllUnitConversions(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UnitConversionDTO>>>;
-    public getAllUnitConversions(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getAllUnits(observe?: 'body', reportProgress?: boolean): Observable<Array<UnitDTO>>;
+    public getAllUnits(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UnitDTO>>>;
+    public getAllUnits(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UnitDTO>>>;
+    public getAllUnits(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -198,7 +199,7 @@ export class UnitConversionService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<Array<UnitConversionDTO>>(`${this.basePath}/v2/conversion`,
+        return this.httpClient.get<Array<UnitDTO>>(`${this.basePath}/v2/unit`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -209,19 +210,19 @@ export class UnitConversionService {
     }
 
     /**
-     * Retrieve a Unit Conversion by its UUID
-     * A Spark Works Accounts authenticated user is able to retrieve a Unit Conversion.
-     * @param uuid The Unit Conversion UUID
+     * Retrieve a Unit by its UUID
+     * A Spark Works Accounts authenticated common user is able to retrieve a Unit that has permissions on by its UUID. An administrator is able to get any Unit by its UUID.
+     * @param uuid The Unit UUID
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getUnitConversionByUuid(uuid: string, observe?: 'body', reportProgress?: boolean): Observable<UnitConversionDTO>;
-    public getUnitConversionByUuid(uuid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UnitConversionDTO>>;
-    public getUnitConversionByUuid(uuid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UnitConversionDTO>>;
-    public getUnitConversionByUuid(uuid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getUnitByUuid(uuid: string, observe?: 'body', reportProgress?: boolean): Observable<UnitDTO>;
+    public getUnitByUuid(uuid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UnitDTO>>;
+    public getUnitByUuid(uuid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UnitDTO>>;
+    public getUnitByUuid(uuid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling getUnitConversionByUuid.');
+            throw new Error('Required parameter uuid was null or undefined when calling getUnitByUuid.');
         }
 
         let headers = this.defaultHeaders;
@@ -247,7 +248,7 @@ export class UnitConversionService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<UnitConversionDTO>(`${this.basePath}/v2/conversion/${encodeURIComponent(String(uuid))}`,
+        return this.httpClient.get<UnitDTO>(`${this.basePath}/v2/unit/${encodeURIComponent(String(uuid))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -258,19 +259,19 @@ export class UnitConversionService {
     }
 
     /**
-     * Retrieve a List of Unit Conversions by a query
-     * A Spark Works Accounts authenticated user is able to retrieve a List of Unit Conversion.
-     * @param unitConversionQueryDTO Unit Conversion Query API Model
+     * Retrieve a Unit by a query
+     * A Spark Works Accounts authenticated user is able to retrieve a Unit.
+     * @param unitQueryDTO Unit Query API Model
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public queryUnitConversions(unitConversionQueryDTO: UnitConversionQueryDTO, observe?: 'body', reportProgress?: boolean): Observable<Array<UnitConversionDTO>>;
-    public queryUnitConversions(unitConversionQueryDTO: UnitConversionQueryDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<UnitConversionDTO>>>;
-    public queryUnitConversions(unitConversionQueryDTO: UnitConversionQueryDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<UnitConversionDTO>>>;
-    public queryUnitConversions(unitConversionQueryDTO: UnitConversionQueryDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public queryUnits(unitQueryDTO: UnitQueryDTO, observe?: 'body', reportProgress?: boolean): Observable<UnitDTO>;
+    public queryUnits(unitQueryDTO: UnitQueryDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UnitDTO>>;
+    public queryUnits(unitQueryDTO: UnitQueryDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UnitDTO>>;
+    public queryUnits(unitQueryDTO: UnitQueryDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
-        if (unitConversionQueryDTO === null || unitConversionQueryDTO === undefined) {
-            throw new Error('Required parameter unitConversionQueryDTO was null or undefined when calling queryUnitConversions.');
+        if (unitQueryDTO === null || unitQueryDTO === undefined) {
+            throw new Error('Required parameter unitQueryDTO was null or undefined when calling queryUnits.');
         }
 
         let headers = this.defaultHeaders;
@@ -301,8 +302,68 @@ export class UnitConversionService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<Array<UnitConversionDTO>>(`${this.basePath}/v2/conversion/query`,
-            unitConversionQueryDTO,
+        return this.httpClient.post<UnitDTO>(`${this.basePath}/v2/unit/query`,
+            unitQueryDTO,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Update Unit
+     * A Spark Works Accounts administrator is able to update a Unit by its UUID.
+     * @param uuid The Unit UUID
+     * @param updateDTO updateDTO
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateUnit(uuid: string, updateDTO: UnitUpdateDTO, observe?: 'body', reportProgress?: boolean): Observable<UnitDTO>;
+    public updateUnit(uuid: string, updateDTO: UnitUpdateDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UnitDTO>>;
+    public updateUnit(uuid: string, updateDTO: UnitUpdateDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UnitDTO>>;
+    public updateUnit(uuid: string, updateDTO: UnitUpdateDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (uuid === null || uuid === undefined) {
+            throw new Error('Required parameter uuid was null or undefined when calling updateUnit.');
+        }
+
+        if (updateDTO === null || updateDTO === undefined) {
+            throw new Error('Required parameter updateDTO was null or undefined when calling updateUnit.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // authentication (oauth2) required
+        if (this.configuration.accessToken) {
+            const accessToken = typeof this.configuration.accessToken === 'function'
+                ? this.configuration.accessToken()
+                : this.configuration.accessToken;
+            headers = headers.set('Authorization', 'Bearer ' + accessToken);
+        }
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<UnitDTO>(`${this.basePath}/v2/unit/${encodeURIComponent(String(uuid))}`,
+            updateDTO,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
