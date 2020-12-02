@@ -19,10 +19,10 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 import { FoodDiaryDTO } from '../model/foodDiaryDTO';
-import { FoodDiaryDataCriteriaDTOAPIModel } from '../model/foodDiaryDataCriteriaDTOAPIModel';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
+import {FoodDiaryDataCriteriaDTO, SleepDataCriteriaDTO, SleepDataResponseDTO} from "../..";
 
 
 @Injectable({
@@ -66,10 +66,10 @@ export class SmartWorkService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public retrieveFoodDiaryUsingPOST(foodDiaryDataCriteriaDTO: FoodDiaryDataCriteriaDTOAPIModel, observe?: 'body', reportProgress?: boolean): Observable<Array<FoodDiaryDTO>>;
-    public retrieveFoodDiaryUsingPOST(foodDiaryDataCriteriaDTO: FoodDiaryDataCriteriaDTOAPIModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<FoodDiaryDTO>>>;
-    public retrieveFoodDiaryUsingPOST(foodDiaryDataCriteriaDTO: FoodDiaryDataCriteriaDTOAPIModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<FoodDiaryDTO>>>;
-    public retrieveFoodDiaryUsingPOST(foodDiaryDataCriteriaDTO: FoodDiaryDataCriteriaDTOAPIModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public retrieveFoodDiary(foodDiaryDataCriteriaDTO: FoodDiaryDataCriteriaDTO, observe?: 'body', reportProgress?: boolean): Observable<Array<FoodDiaryDTO>>;
+    public retrieveFoodDiary(foodDiaryDataCriteriaDTO: FoodDiaryDataCriteriaDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<FoodDiaryDTO>>>;
+    public retrieveFoodDiary(foodDiaryDataCriteriaDTO: FoodDiaryDataCriteriaDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<FoodDiaryDTO>>>;
+    public retrieveFoodDiary(foodDiaryDataCriteriaDTO: FoodDiaryDataCriteriaDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (foodDiaryDataCriteriaDTO === null || foodDiaryDataCriteriaDTO === undefined) {
             throw new Error('Required parameter foodDiaryDataCriteriaDTO was null or undefined when calling retrieveFoodDiaryUsingPOST.');
@@ -112,6 +112,60 @@ export class SmartWorkService {
                 reportProgress: reportProgress
             }
         );
+    }
+
+    /**
+     * retrieveSleepData
+     *
+     * @param sleepDataCriteriaDTO Sleep Data Timerange criteria
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public retrieveSleepData(sleepDataCriteriaDTO: SleepDataCriteriaDTO, observe?: 'body', reportProgress?: boolean): Observable<Array<SleepDataResponseDTO>>;
+    public retrieveSleepData(sleepDataCriteriaDTO: SleepDataCriteriaDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<SleepDataResponseDTO>>>;
+    public retrieveSleepData(sleepDataCriteriaDTO: SleepDataCriteriaDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<SleepDataResponseDTO>>>;
+    public retrieveSleepData(sleepDataCriteriaDTO: SleepDataCriteriaDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+      if (sleepDataCriteriaDTO === null || sleepDataCriteriaDTO === undefined) {
+        throw new Error('Required parameter foodDiaryDataCriteriaDTO was null or undefined when calling retrieveFoodDiaryUsingPOST.');
+      }
+
+      let headers = this.defaultHeaders;
+
+      // authentication (oauth2) required
+      if (this.configuration.accessToken) {
+        const accessToken = typeof this.configuration.accessToken === 'function'
+          ? this.configuration.accessToken()
+          : this.configuration.accessToken;
+        headers = headers.set('Authorization', 'Bearer ' + accessToken);
+      }
+
+      // to determine the Accept header
+      let httpHeaderAccepts: string[] = [
+        '*/*'
+      ];
+      const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+      if (httpHeaderAcceptSelected != undefined) {
+        headers = headers.set('Accept', httpHeaderAcceptSelected);
+      }
+
+      // to determine the Content-Type header
+      const consumes: string[] = [
+        'application/json'
+      ];
+      const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+      if (httpContentTypeSelected != undefined) {
+        headers = headers.set('Content-Type', httpContentTypeSelected);
+      }
+      return this.httpClient.post<Array<SleepDataResponseDTO>>(`${this.basePath}/v2/project/smartwork/sleep`,
+        sleepDataCriteriaDTO,
+        {
+          withCredentials: this.configuration.withCredentials,
+          headers: headers,
+          observe: observe,
+          reportProgress: reportProgress
+        }
+      );
     }
 
 }

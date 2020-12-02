@@ -11,9 +11,11 @@
  */
 
 /**
- * The Resource Query
+ * Wrapper object for latest Data query responses
  */
-export interface ResourceQueryDTO { 
-    systemName?: string;
-    uuid?: string;
+export interface QueryLatestResourceDataResultDTO { 
+    /**
+     * Holder map that contains the requested criteria as keys and their responses as values
+     */
+    results?: any;
 }

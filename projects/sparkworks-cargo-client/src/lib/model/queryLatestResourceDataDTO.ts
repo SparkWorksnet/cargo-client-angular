@@ -10,10 +10,14 @@
  * Do not edit the class manually.
  */
 
+import {QueryResourceDataCriteriaDTO} from "./queryResourceDataCriteriaDTO";
+
 /**
- * The Resource Query
+ * Data query criteria
  */
-export interface ResourceQueryDTO { 
-    systemName?: string;
-    uuid?: string;
+export interface QueryLatestResourceDataDTO {
+    /**
+     * Collection holding queries for latest Resource data
+     */
+    queries: Array<QueryResourceDataCriteriaDTO>;
 }

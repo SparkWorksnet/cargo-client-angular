@@ -11,9 +11,15 @@
  */
 
 /**
- * The Resource Query
+ * The API Model describing a single Spark Works platform Resource Measurement API Model
  */
-export interface ResourceQueryDTO { 
-    systemName?: string;
-    uuid?: string;
+export interface ResourceDataDTO { 
+    /**
+     * The UNIX timestamp of the Date when the Spark Works platform measurement was captured
+     */
+    timestamp?: number;
+    /**
+     * The actual value of the measurement
+     */
+    reading?: number;
 }

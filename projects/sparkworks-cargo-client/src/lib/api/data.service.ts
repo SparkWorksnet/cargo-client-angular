@@ -18,20 +18,19 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { PublishDataListDTOAPIModel } from '../model/publishDataListDTOAPIModel';
-import { QueryLatestResourceDataDTOAPIModel } from '../model/queryLatestResourceDataDTOAPIModel';
-import { QueryLatestResourceDataResultDTOAPIModel } from '../model/queryLatestResourceDataResultDTOAPIModel';
-import { QueryRawDataTimeRangeDTOAPIModel } from '../model/queryRawDataTimeRangeDTOAPIModel';
-import { QueryRawDataTimeRangeResultDTOAPIModel } from '../model/queryRawDataTimeRangeResultDTOAPIModel';
-import { QueryResourceDataCriteriaDTOAPIModel } from '../model/queryResourceDataCriteriaDTOAPIModel';
-import { QueryTimeRangeResourceDataDTOAPIModel } from '../model/queryTimeRangeResourceDataDTOAPIModel';
-import { QueryTimeRangeResourceDataResultDTOAPIModel } from '../model/queryTimeRangeResourceDataResultDTOAPIModel';
-import { ResourceLatestValuesResponseAPIModel } from '../model/resourceLatestValuesResponseAPIModel';
-import { TheResourceSummaryDataAPIModel } from '../model/theResourceSummaryDataAPIModel';
-import { TypicalHourlyDataDTO } from '../model/typicalHourlyDataDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
+import {
+  LatestDTO,
+  PublishDataListDTO,
+  QueryLatestResourceDataDTO,
+  QueryLatestResourceDataResultDTO, QueryRawDataTimeRangeDTO, QueryRawDataTimeRangeResultDTO,
+  QueryResourceDataCriteriaDTO,
+  QueryTimeRangeResourceDataDTO,
+  QueryTimeRangeResourceDataResultDTO,
+  SummaryDTO, TypicalHourlyDataDTO
+} from "../..";
 
 
 @Injectable({
@@ -75,9 +74,9 @@ export class DataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getLatestByUuid(uuid: string, observe?: 'body', reportProgress?: boolean): Observable<ResourceLatestValuesResponseAPIModel>;
-    public getLatestByUuid(uuid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResourceLatestValuesResponseAPIModel>>;
-    public getLatestByUuid(uuid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResourceLatestValuesResponseAPIModel>>;
+    public getLatestByUuid(uuid: string, observe?: 'body', reportProgress?: boolean): Observable<LatestDTO>;
+    public getLatestByUuid(uuid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<LatestDTO>>;
+    public getLatestByUuid(uuid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<LatestDTO>>;
     public getLatestByUuid(uuid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (uuid === null || uuid === undefined) {
@@ -107,7 +106,7 @@ export class DataService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<ResourceLatestValuesResponseAPIModel>(`${this.basePath}/v2/resource/${encodeURIComponent(String(uuid))}/latest`,
+        return this.httpClient.get<LatestDTO>(`${this.basePath}/v2/resource/${encodeURIComponent(String(uuid))}/latest`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -124,9 +123,9 @@ export class DataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSummaryByUuid(uuid: string, observe?: 'body', reportProgress?: boolean): Observable<TheResourceSummaryDataAPIModel>;
-    public getSummaryByUuid(uuid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<TheResourceSummaryDataAPIModel>>;
-    public getSummaryByUuid(uuid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<TheResourceSummaryDataAPIModel>>;
+    public getSummaryByUuid(uuid: string, observe?: 'body', reportProgress?: boolean): Observable<SummaryDTO>;
+    public getSummaryByUuid(uuid: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SummaryDTO>>;
+    public getSummaryByUuid(uuid: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SummaryDTO>>;
     public getSummaryByUuid(uuid: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (uuid === null || uuid === undefined) {
@@ -156,7 +155,7 @@ export class DataService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<TheResourceSummaryDataAPIModel>(`${this.basePath}/v2/resource/${encodeURIComponent(String(uuid))}/summary`,
+        return this.httpClient.get<SummaryDTO>(`${this.basePath}/v2/resource/${encodeURIComponent(String(uuid))}/summary`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -173,10 +172,10 @@ export class DataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public publishData(publishDataListDTO?: PublishDataListDTOAPIModel, observe?: 'body', reportProgress?: boolean): Observable<PublishDataListDTOAPIModel>;
-    public publishData(publishDataListDTO?: PublishDataListDTOAPIModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PublishDataListDTOAPIModel>>;
-    public publishData(publishDataListDTO?: PublishDataListDTOAPIModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PublishDataListDTOAPIModel>>;
-    public publishData(publishDataListDTO?: PublishDataListDTOAPIModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public publishData(publishDataListDTO?: PublishDataListDTO, observe?: 'body', reportProgress?: boolean): Observable<PublishDataListDTO>;
+    public publishData(publishDataListDTO?: PublishDataListDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PublishDataListDTO>>;
+    public publishData(publishDataListDTO?: PublishDataListDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PublishDataListDTO>>;
+    public publishData(publishDataListDTO?: PublishDataListDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let headers = this.defaultHeaders;
@@ -207,7 +206,7 @@ export class DataService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<PublishDataListDTOAPIModel>(`${this.basePath}/v2/resource/data/publish`,
+        return this.httpClient.post<PublishDataListDTO>(`${this.basePath}/v2/resource/data/publish`,
             publishDataListDTO,
             {
                 withCredentials: this.configuration.withCredentials,
@@ -225,10 +224,10 @@ export class DataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public queryLatest(queryLatestResourceDataDTO: QueryLatestResourceDataDTOAPIModel, observe?: 'body', reportProgress?: boolean): Observable<QueryLatestResourceDataResultDTOAPIModel>;
-    public queryLatest(queryLatestResourceDataDTO: QueryLatestResourceDataDTOAPIModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<QueryLatestResourceDataResultDTOAPIModel>>;
-    public queryLatest(queryLatestResourceDataDTO: QueryLatestResourceDataDTOAPIModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<QueryLatestResourceDataResultDTOAPIModel>>;
-    public queryLatest(queryLatestResourceDataDTO: QueryLatestResourceDataDTOAPIModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public queryLatest(queryLatestResourceDataDTO: QueryLatestResourceDataDTO, observe?: 'body', reportProgress?: boolean): Observable<QueryLatestResourceDataResultDTO>;
+    public queryLatest(queryLatestResourceDataDTO: QueryLatestResourceDataDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<QueryLatestResourceDataResultDTO>>;
+    public queryLatest(queryLatestResourceDataDTO: QueryLatestResourceDataDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<QueryLatestResourceDataResultDTO>>;
+    public queryLatest(queryLatestResourceDataDTO: QueryLatestResourceDataDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (queryLatestResourceDataDTO === null || queryLatestResourceDataDTO === undefined) {
             throw new Error('Required parameter queryLatestResourceDataDTO was null or undefined when calling queryLatest.');
@@ -262,7 +261,7 @@ export class DataService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<QueryLatestResourceDataResultDTOAPIModel>(`${this.basePath}/v2/resource/query/latest`,
+        return this.httpClient.post<QueryLatestResourceDataResultDTO>(`${this.basePath}/v2/resource/query/latest`,
             queryLatestResourceDataDTO,
             {
                 withCredentials: this.configuration.withCredentials,
@@ -280,10 +279,10 @@ export class DataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public querySummary(queryResourceDataCriteriaDTO: QueryResourceDataCriteriaDTOAPIModel, observe?: 'body', reportProgress?: boolean): Observable<TheResourceSummaryDataAPIModel>;
-    public querySummary(queryResourceDataCriteriaDTO: QueryResourceDataCriteriaDTOAPIModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<TheResourceSummaryDataAPIModel>>;
-    public querySummary(queryResourceDataCriteriaDTO: QueryResourceDataCriteriaDTOAPIModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<TheResourceSummaryDataAPIModel>>;
-    public querySummary(queryResourceDataCriteriaDTO: QueryResourceDataCriteriaDTOAPIModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public querySummary(queryResourceDataCriteriaDTO: QueryResourceDataCriteriaDTO, observe?: 'body', reportProgress?: boolean): Observable<SummaryDTO>;
+    public querySummary(queryResourceDataCriteriaDTO: QueryResourceDataCriteriaDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<SummaryDTO>>;
+    public querySummary(queryResourceDataCriteriaDTO: QueryResourceDataCriteriaDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<SummaryDTO>>;
+    public querySummary(queryResourceDataCriteriaDTO: QueryResourceDataCriteriaDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (queryResourceDataCriteriaDTO === null || queryResourceDataCriteriaDTO === undefined) {
             throw new Error('Required parameter queryResourceDataCriteriaDTO was null or undefined when calling querySummary.');
@@ -317,7 +316,7 @@ export class DataService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<TheResourceSummaryDataAPIModel>(`${this.basePath}/v2/resource/query/summary`,
+        return this.httpClient.post<SummaryDTO>(`${this.basePath}/v2/resource/query/summary`,
             queryResourceDataCriteriaDTO,
             {
                 withCredentials: this.configuration.withCredentials,
@@ -335,10 +334,10 @@ export class DataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public queryTimeRange(queryTimeRangeResourceDataDTO: QueryTimeRangeResourceDataDTOAPIModel, observe?: 'body', reportProgress?: boolean): Observable<QueryTimeRangeResourceDataResultDTOAPIModel>;
-    public queryTimeRange(queryTimeRangeResourceDataDTO: QueryTimeRangeResourceDataDTOAPIModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<QueryTimeRangeResourceDataResultDTOAPIModel>>;
-    public queryTimeRange(queryTimeRangeResourceDataDTO: QueryTimeRangeResourceDataDTOAPIModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<QueryTimeRangeResourceDataResultDTOAPIModel>>;
-    public queryTimeRange(queryTimeRangeResourceDataDTO: QueryTimeRangeResourceDataDTOAPIModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public queryTimeRange(queryTimeRangeResourceDataDTO: QueryTimeRangeResourceDataDTO, observe?: 'body', reportProgress?: boolean): Observable<QueryTimeRangeResourceDataResultDTO>;
+    public queryTimeRange(queryTimeRangeResourceDataDTO: QueryTimeRangeResourceDataDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<QueryTimeRangeResourceDataResultDTO>>;
+    public queryTimeRange(queryTimeRangeResourceDataDTO: QueryTimeRangeResourceDataDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<QueryTimeRangeResourceDataResultDTO>>;
+    public queryTimeRange(queryTimeRangeResourceDataDTO: QueryTimeRangeResourceDataDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (queryTimeRangeResourceDataDTO === null || queryTimeRangeResourceDataDTO === undefined) {
             throw new Error('Required parameter queryTimeRangeResourceDataDTO was null or undefined when calling queryTimeRange.');
@@ -372,7 +371,7 @@ export class DataService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<QueryTimeRangeResourceDataResultDTOAPIModel>(`${this.basePath}/v2/resource/query/timerange`,
+        return this.httpClient.post<QueryTimeRangeResourceDataResultDTO>(`${this.basePath}/v2/resource/query/timerange`,
             queryTimeRangeResourceDataDTO,
             {
                 withCredentials: this.configuration.withCredentials,
@@ -390,10 +389,10 @@ export class DataService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public queryTimeRangeRaw(queryRawDataTimeRangeDTO: QueryRawDataTimeRangeDTOAPIModel, observe?: 'body', reportProgress?: boolean): Observable<QueryRawDataTimeRangeResultDTOAPIModel>;
-    public queryTimeRangeRaw(queryRawDataTimeRangeDTO: QueryRawDataTimeRangeDTOAPIModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<QueryRawDataTimeRangeResultDTOAPIModel>>;
-    public queryTimeRangeRaw(queryRawDataTimeRangeDTO: QueryRawDataTimeRangeDTOAPIModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<QueryRawDataTimeRangeResultDTOAPIModel>>;
-    public queryTimeRangeRaw(queryRawDataTimeRangeDTO: QueryRawDataTimeRangeDTOAPIModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public queryTimeRangeRaw(queryRawDataTimeRangeDTO: QueryRawDataTimeRangeDTO, observe?: 'body', reportProgress?: boolean): Observable<QueryRawDataTimeRangeResultDTO>;
+    public queryTimeRangeRaw(queryRawDataTimeRangeDTO: QueryRawDataTimeRangeDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<QueryRawDataTimeRangeResultDTO>>;
+    public queryTimeRangeRaw(queryRawDataTimeRangeDTO: QueryRawDataTimeRangeDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<QueryRawDataTimeRangeResultDTO>>;
+    public queryTimeRangeRaw(queryRawDataTimeRangeDTO: QueryRawDataTimeRangeDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (queryRawDataTimeRangeDTO === null || queryRawDataTimeRangeDTO === undefined) {
             throw new Error('Required parameter queryRawDataTimeRangeDTO was null or undefined when calling queryTimeRangeRaw.');
@@ -427,7 +426,7 @@ export class DataService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<QueryRawDataTimeRangeResultDTOAPIModel>(`${this.basePath}/v2/resource/query/raw/timerange`,
+        return this.httpClient.post<QueryRawDataTimeRangeResultDTO>(`${this.basePath}/v2/resource/query/raw/timerange`,
             queryRawDataTimeRangeDTO,
             {
                 withCredentials: this.configuration.withCredentials,

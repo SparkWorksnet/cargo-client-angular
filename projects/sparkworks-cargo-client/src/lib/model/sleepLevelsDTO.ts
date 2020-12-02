@@ -9,11 +9,11 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import {SleepDataEntryDTO} from "./sleepDataEntryDTO";
+import {SleepSummaryDTO} from "./sleepSummaryDTO";
 
-/**
- * The Resource Query
- */
-export interface ResourceQueryDTO { 
-    systemName?: string;
-    uuid?: string;
+export interface SleepLevelsDTO {
+    data?: Array<SleepDataEntryDTO>;
+    shortData?: Array<SleepDataEntryDTO>;
+    summary?: SleepSummaryDTO
 }

@@ -10,10 +10,14 @@
  * Do not edit the class manually.
  */
 
+import {PublishDataDTO} from "./publishDataDTO";
+
 /**
- * The Resource Query
+ * Data to be published
  */
-export interface ResourceQueryDTO { 
-    systemName?: string;
-    uuid?: string;
+export interface PublishDataListDTO {
+    /**
+     * Collection of data points to be sent for processing
+     */
+    data: Array<PublishDataDTO>;
 }

@@ -18,10 +18,9 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { CommandAPIModel } from '../model/commandAPIModel';
-
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
+import {CommandDTO} from "../..";
 
 
 @Injectable({
@@ -66,10 +65,10 @@ export class CommandService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public sendCommand(uuid: string, commandDto: CommandAPIModel, observe?: 'body', reportProgress?: boolean): Observable<CommandAPIModel>;
-    public sendCommand(uuid: string, commandDto: CommandAPIModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CommandAPIModel>>;
-    public sendCommand(uuid: string, commandDto: CommandAPIModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CommandAPIModel>>;
-    public sendCommand(uuid: string, commandDto: CommandAPIModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public sendCommand(uuid: string, commandDto: CommandDTO, observe?: 'body', reportProgress?: boolean): Observable<CommandDTO>;
+    public sendCommand(uuid: string, commandDto: CommandDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CommandDTO>>;
+    public sendCommand(uuid: string, commandDto: CommandDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CommandDTO>>;
+    public sendCommand(uuid: string, commandDto: CommandDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (uuid === null || uuid === undefined) {
             throw new Error('Required parameter uuid was null or undefined when calling sendCommand.');
@@ -107,7 +106,7 @@ export class CommandService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<CommandAPIModel>(`${this.basePath}/v2/command/${encodeURIComponent(String(uuid))}`,
+        return this.httpClient.post<CommandDTO>(`${this.basePath}/v2/command/${encodeURIComponent(String(uuid))}`,
             commandDto,
             {
                 withCredentials: this.configuration.withCredentials,

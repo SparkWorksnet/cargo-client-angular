@@ -10,10 +10,9 @@
  * Do not edit the class manually.
  */
 
-/**
- * The Resource Query
- */
-export interface ResourceQueryDTO { 
-    systemName?: string;
-    uuid?: string;
+export interface FoodDiaryDTOCreatedTimeZone { 
+    displayName?: string;
+    id?: string;
+    rawOffset?: number;
+    dstsavings?: number;
 }

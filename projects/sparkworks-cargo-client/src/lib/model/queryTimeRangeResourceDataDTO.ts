@@ -10,10 +10,14 @@
  * Do not edit the class manually.
  */
 
+import {QueryTimeRangeResourceDataCriteriaDTO} from "./queryTimeRangeResourceDataCriteriaDTO";
+
 /**
- * The Resource Query
+ * Timerange criteria
  */
-export interface ResourceQueryDTO { 
-    systemName?: string;
-    uuid?: string;
+export interface QueryTimeRangeResourceDataDTO {
+    /**
+     * Collection holding queries for timerange Resource data
+     */
+    queries: Array<QueryTimeRangeResourceDataCriteriaDTO>;
 }

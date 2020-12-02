@@ -9,11 +9,21 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import {SleepSummaryEntryDTO} from "./sleepSummaryEntryDTO";
 
-/**
- * The Resource Query
- */
-export interface ResourceQueryDTO { 
-    systemName?: string;
-    uuid?: string;
+export interface SleepSummaryDTO {
+
+  light?: SleepSummaryEntryDTO;
+
+  restless?: SleepSummaryEntryDTO;
+
+  deep?: SleepSummaryEntryDTO;
+
+  rem?: SleepSummaryEntryDTO;
+
+  awake?: SleepSummaryEntryDTO;
+
+  wake?: SleepSummaryEntryDTO;
+
+  asleep?: SleepSummaryEntryDTO;
 }

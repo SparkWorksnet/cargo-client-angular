@@ -11,9 +11,19 @@
  */
 
 /**
- * The Resource Query
+ * Sleep Data Timerange criteria
  */
-export interface ResourceQueryDTO { 
-    systemName?: string;
-    uuid?: string;
+export interface SleepDataCriteriaDTO { 
+    /**
+     * The UUID of the Sleep Data Resource
+     */
+    resourceUuid?: string;
+    /**
+     * The UNIX timestamp of the start date for filtering
+     */
+    from: number;
+    /**
+     * The UNIX timestamp of the end date for filtering
+     */
+    to: number;
 }

@@ -18,12 +18,11 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { AParticipatorySensingResourceRequestAPIModel } from '../model/aParticipatorySensingResourceRequestAPIModel';
-import { PublishDataListDTOAPIModel } from '../model/publishDataListDTOAPIModel';
-import { ResourceDTO } from '../model/resourceDTO';
+import {PublishDataListDTO, ResourceDTO} from '../..';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
+import {PSCreateResourceDTO} from "../..";
 
 
 @Injectable({
@@ -67,10 +66,10 @@ export class ParticipatorySensingService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public createPsResource(resourceDTO: AParticipatorySensingResourceRequestAPIModel, observe?: 'body', reportProgress?: boolean): Observable<ResourceDTO>;
-    public createPsResource(resourceDTO: AParticipatorySensingResourceRequestAPIModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResourceDTO>>;
-    public createPsResource(resourceDTO: AParticipatorySensingResourceRequestAPIModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResourceDTO>>;
-    public createPsResource(resourceDTO: AParticipatorySensingResourceRequestAPIModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public createPsResource(resourceDTO: PSCreateResourceDTO, observe?: 'body', reportProgress?: boolean): Observable<ResourceDTO>;
+    public createPsResource(resourceDTO: PSCreateResourceDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ResourceDTO>>;
+    public createPsResource(resourceDTO: PSCreateResourceDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ResourceDTO>>;
+    public createPsResource(resourceDTO: PSCreateResourceDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (resourceDTO === null || resourceDTO === undefined) {
             throw new Error('Required parameter resourceDTO was null or undefined when calling createPsResource.');
@@ -171,10 +170,10 @@ export class ParticipatorySensingService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public publishPsData(publishDataListDTO: PublishDataListDTOAPIModel, observe?: 'body', reportProgress?: boolean): Observable<PublishDataListDTOAPIModel>;
-    public publishPsData(publishDataListDTO: PublishDataListDTOAPIModel, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PublishDataListDTOAPIModel>>;
-    public publishPsData(publishDataListDTO: PublishDataListDTOAPIModel, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PublishDataListDTOAPIModel>>;
-    public publishPsData(publishDataListDTO: PublishDataListDTOAPIModel, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public publishPsData(publishDataListDTO: PublishDataListDTO, observe?: 'body', reportProgress?: boolean): Observable<PublishDataListDTO>;
+    public publishPsData(publishDataListDTO: PublishDataListDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<PublishDataListDTO>>;
+    public publishPsData(publishDataListDTO: PublishDataListDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<PublishDataListDTO>>;
+    public publishPsData(publishDataListDTO: PublishDataListDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (publishDataListDTO === null || publishDataListDTO === undefined) {
             throw new Error('Required parameter publishDataListDTO was null or undefined when calling publishPsData.');
@@ -208,7 +207,7 @@ export class ParticipatorySensingService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.post<PublishDataListDTOAPIModel>(`${this.basePath}/v2/ps/data`,
+        return this.httpClient.post<PublishDataListDTO>(`${this.basePath}/v2/ps/data`,
             publishDataListDTO,
             {
                 withCredentials: this.configuration.withCredentials,

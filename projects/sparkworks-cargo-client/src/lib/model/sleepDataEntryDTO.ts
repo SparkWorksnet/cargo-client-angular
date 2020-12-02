@@ -10,10 +10,8 @@
  * Do not edit the class manually.
  */
 
-/**
- * The Resource Query
- */
-export interface ResourceQueryDTO { 
-    systemName?: string;
-    uuid?: string;
+export interface SleepDataEntryDTO { 
+    dateTime?: Date;
+    level?: string;
+    seconds?: number;
 }

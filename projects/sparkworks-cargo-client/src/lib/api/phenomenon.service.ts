@@ -18,13 +18,10 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { PhenomenonCreateDTO } from '../model/phenomenonCreateDTO';
-import { PhenomenonDTO } from '../model/phenomenonDTO';
-import { PhenomenonQueryDTO } from '../model/phenomenonQueryDTO';
-import { PhenomenonUpdateDTO } from '../model/phenomenonUpdateDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
+import {PhenomenonCreateDTO, PhenomenonDTO, PhenomenonQueryDTO, PhenomenonUpdateDTO} from "../..";
 
 
 @Injectable({
