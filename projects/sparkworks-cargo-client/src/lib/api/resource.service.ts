@@ -25,6 +25,7 @@ import { ResourceUpdateDTO } from '../model/resourceUpdateDTO';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
+import {ResourceExtendedQueryDTO} from "../model/resourceExtendedQueryDTO";
 
 
 @Injectable({
@@ -473,4 +474,59 @@ export class ResourceService {
         );
     }
 
+  /**
+   * Retrieve Resources by an Extended Query
+   * A Spark Works Accounts authenticated common user is able to retrieve Resources that has permissions on by a query object. An administrator is able to get any Resource by an extended query object.
+   * @param resourceExtendedQueryDTO The Resource Extended Query
+   * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+   * @param reportProgress flag to report request and response progress.
+   */
+  public extendedQueryResources(resourceExtendedQueryDTO: ResourceExtendedQueryDTO, observe?: 'body', reportProgress?: boolean): Observable<Array<ResourceDTO>>;
+  public extendedQueryResources(resourceExtendedQueryDTO: ResourceExtendedQueryDTO, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ResourceDTO>>>;
+  public extendedQueryResources(resourceExtendedQueryDTO: ResourceExtendedQueryDTO, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ResourceDTO>>>;
+  public extendedQueryResources(resourceExtendedQueryDTO: ResourceExtendedQueryDTO, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+
+    if (resourceExtendedQueryDTO === null || resourceExtendedQueryDTO === undefined) {
+      throw new Error('Required parameter resourceUpdateDTO was null or undefined when calling updateResource.');
+    }
+
+    let headers = this.defaultHeaders;
+
+    // authentication (oauth2) required
+    if (this.configuration.accessToken) {
+      const accessToken = typeof this.configuration.accessToken === 'function'
+        ? this.configuration.accessToken()
+        : this.configuration.accessToken;
+      headers = headers.set('Authorization', 'Bearer ' + accessToken);
+    }
+
+    // to determine the Accept header
+    let httpHeaderAccepts: string[] = [
+      '*/*'
+    ];
+    const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+    if (httpHeaderAcceptSelected != undefined) {
+      headers = headers.set('Accept', httpHeaderAcceptSelected);
+    }
+
+    // to determine the Content-Type header
+    const consumes: string[] = [
+      'application/json'
+    ];
+    const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+    if (httpContentTypeSelected != undefined) {
+      headers = headers.set('Content-Type', httpContentTypeSelected);
+    }
+
+    return this.httpClient.post<Array<ResourceDTO>>(`${this.basePath}/v2/resource/queryExtended`,
+      resourceExtendedQueryDTO,
+      {
+        withCredentials: this.configuration.withCredentials,
+        headers: headers,
+        observe: observe,
+        reportProgress: reportProgress
+      }
+    );
+  }
 }

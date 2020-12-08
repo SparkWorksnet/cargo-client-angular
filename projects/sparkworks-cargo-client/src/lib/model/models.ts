@@ -30,6 +30,7 @@ export * from './registryRecordDTO';
 export * from './resourceCreateDTO';
 export * from './resourceDTO';
 export * from './resourceDataDTO';
+export * from './resourceExtendedQueryDTO';
 export * from './resourceQueryDTO';
 export * from './resourceUpdateDTO';
 export * from './sleepDataCriteriaDTO';

@@ -1,6 +1,6 @@
 {
   "name": "sparkworks-cargo-client",
-  "version": "2.10.7",
+  "version": "2.10.8",
   "peerDependencies": {
     "@angular/common": "^10.2.0",
     "@angular/core": "^10.2.0"
